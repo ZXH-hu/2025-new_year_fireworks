@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>迎接新年</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #c72a2a; /* 金色背景 */
+            font-family: Arial, sans-serif;
+        }
+        #countdown {
+            font-size: 260px; /* 较大字体 */
+            font-weight: bold;
+            color: #000000; /* 深黑色字体 */
+        }
+    </style>
+</head>
+<body>
+    <div id="countdown">5</div>
+    <!-- 隐藏播放控件的背景音乐组件 -->
+    <audio src="./countdown5.mp3" id="myAudio" autoplay loop></audio>
+    <script>
+        // 自动播放兼容处理
+        document.addEventListener('DOMContentLoaded', function () {
+            const audio = document.getElementById('myAudio');
+            // 尝试在页面加载后播放
+            audio.play().catch((error) => {
+                console.warn('用户交互之前可能禁止自动播放音频:', error);
+            });
+        });
+    </script>
+
+    <script>
+        let countdownElement = document.getElementById('countdown');
+        let timeLeft = 5; // 倒计时起始时间
+
+        // 倒计时函数
+        const countdownTimer = setInterval(() => {
+            timeLeft--; // 每秒减1
+            countdownElement.textContent = timeLeft; // 更新显示的时间
+
+            if (timeLeft <= 0) {
+                clearInterval(countdownTimer); // 停止计时器
+                window.location.href = "index.html"; // 跳转到烟花页面
+            }
+        }, 1000); // 每1000ms执行一次
+    </script>
+</body>
+</html>
